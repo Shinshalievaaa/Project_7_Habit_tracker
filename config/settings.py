@@ -2,22 +2,18 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from celery.schedules import crontab
+from dotenv import load_dotenv
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_j%p5^-afp8d3!ldui)zt@d$jhre&j9cscfm=+h%j*b07t*419'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv("DEBUG") == "True" else False
 
 ALLOWED_HOSTS = []
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,11 +23,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Сторонние библиотеки
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
 
-    # Локальные приложения
     'users',
     'habits',
 ]

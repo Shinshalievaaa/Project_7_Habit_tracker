@@ -1,26 +1,29 @@
-[project]
+[tool.poetry]
 name = "project-7-habit-tracker"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
+description = "habit tracker"
+authors = ["Aigul <test@example.com>"]
+package-mode = false
 readme = "README.md"
-requires-python = ">=3.13,<4.0"
-dependencies = [
-    "pillow (>=12.3.0,<13.0.0)",
-    "requests (>=2.34.2,<3.0.0)",
-    "python-dotenv (>=1.2.3,<2.0.0)",
-    "celery (>=5.6.3,<6.0.0)",
-    "redis (>=8.1.0,<9.0.0)",
-    "django-celery-beat (>=2.9.0,<3.0.0)",
-    "eventlet (>=0.41.2,<0.42.0)",
-    "drf-yasg (>=1.21.15,<2.0.0)",
-    "coverage (>=7.15.4,<8.0.0)",
-    "psycopg2-binary (>=2.9.12,<3.0.0)"
-]
 
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0"
+djangorestframework = "^3.14.0"
+djangorestframework-simplejwt = "^5.3.1"
+django-cors-headers = "^4.3.0"
+gunicorn = "^21.2.0"
+pillow = ">=10.0.0"
+requests = ">=2.31.0"
+python-dotenv = ">=1.0.0"
+celery = ">=5.3.6"
+redis = ">=5.0.1"
+django-celery-beat = ">=2.5.0"
+eventlet = ">=0.33.3"
+drf-yasg = ">=1.21.7"
+coverage = ">=7.3.2"
+psycopg2-binary = "^2.9.9"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

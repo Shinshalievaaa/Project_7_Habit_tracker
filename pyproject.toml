@@ -16,7 +16,8 @@ dependencies = [
     "django-celery-beat (>=2.9.0,<3.0.0)",
     "eventlet (>=0.41.2,<0.42.0)",
     "drf-yasg (>=1.21.15,<2.0.0)",
-    "coverage (>=7.15.4,<8.0.0)"
+    "coverage (>=7.15.4,<8.0.0)",
+    "psycopg2-binary (>=2.9.12,<3.0.0)"
 ]
 
 

@@ -28,8 +28,7 @@ jobs:
           poetry install
 
       - name: Run Flake8 Linting
-        run: |
-          poetry run flake8 . --exclude=.venv,migrations
+        run: poetry run flake8 .
 
       - name: Run Tests
         env:

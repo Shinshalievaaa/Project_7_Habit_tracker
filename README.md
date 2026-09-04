@@ -22,13 +22,65 @@ Backend-сервис REST API для трекинга привычек, разр
 
 ---
 
-## Быстрый запуск проекта
+## Быстрый запуск локально (Docker)
 
-### 1. Клонирование репозитория и установка зависимостей
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone [https://github.com/ваш_username/Project_7_Habit_tracker.git](https://github.com/ваш_username/Project_7_Habit_tracker.git)
+   cd Project_7_Habit_tracker
+   ```
 
-```bash
-git clone https://github.com/Shinshalievaaa/Project_7_Habit_tracker.git
-cd project-7-habit-tracker
+2. **Создайте файл переменные окружения `.env`:**
+   Скопируйте пример `.env.sample` и заполните данные:
+   ```bash
+   cp .env.sample .env
+   ```
 
-# Установка зависимостей через Poetry
-poetry install
+3. **Запустите проект одной командой:**
+   ```bash
+   docker compose up -d --build
+   ```
+
+4. **Примените миграции и создайте суперпользователя:**
+   ```bash
+   docker compose exec app python manage.py migrate
+   docker compose exec app python manage.py createsuperuser
+   ```
+
+Приложение доступно по адресу: `http://localhost`  
+Документация Swagger UI: `http://localhost/redoc/` или `http://localhost/swagger/`
+
+---
+
+## Запуск без Docker (для разработки)
+
+1. Установите зависимости через Poetry:
+   ```bash
+   poetry install
+   ```
+2. Убедитесь, что локально запущены PostgreSQL и Redis.
+3. Примените миграции и запустите сервер:
+   ```bash
+   poetry run python manage.py migrate
+   poetry run python manage.py runserver
+   ```
+4. Для запуска тестов и линтера:
+   ```bash
+   poetry run flake8
+   poetry run python manage.py test
+   ```
+
+---
+
+## Настройка CI/CD и Автодеплоя
+
+В проекте настроен пайплайн GitHub Actions (`.github/workflows/ci-cd.yaml`), который при пуше в ветки `develop` и `main`:
+1. Проверяет стиль кода через `flake8`.
+2. Запускает юнит-тесты Django.
+3. Проверяет собираемость Docker-образа.
+4. При успехе и слиянии в ветку `main` автоматически деплоит обновленный код на удаленный сервер по SSH, перезапускает контейнеры и применяет миграции.
+
+### Переменные Secrets в GitHub:
+* `SERVER_HOST` — IP-адрес удаленного сервера.
+* `SERVER_USER` — SSH-пользователь.
+* `SSH_PRIVATE_KEY` — Приватный SSH-ключ для авторизации на сервере.

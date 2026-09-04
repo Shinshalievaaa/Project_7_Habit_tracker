@@ -93,6 +93,7 @@ jobs:
               git clone https://github.com/${{ github.repository }}.git .
             fi
             
+            
             docker compose down
             docker compose up -d --build
             docker compose exec -T app python manage.py migrate

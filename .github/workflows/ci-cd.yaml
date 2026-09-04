@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "develop", "main" ]
+    branches: [ "main", "develop", "feature/*" ]
   pull_request:
-    branches: [ "develop", "main" ]
+    branches: [ "main"]
 
 jobs:
   lint-and-test:
@@ -57,7 +57,7 @@ jobs:
 
   deploy:
     needs: build-docker
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Remote Server via SSH
